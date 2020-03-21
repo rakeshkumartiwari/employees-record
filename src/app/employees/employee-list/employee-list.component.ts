@@ -18,12 +18,16 @@ export class EmployeeListComponent implements OnInit {
 
   getEmployeeList() {
     this.employeeService.setEmployeeList();
-    this.employeeService.getEmployeeList.subscribe(data => this.employeeList = data );
+    this.employeeService.getEmployeeList.subscribe(data => this.employeeList = data);
   }
 
   onDelete(employeeId: number) {
     this.employeeService.deleteEmployee(employeeId).subscribe(data => this.getEmployeeList());
     this.getEmployeeList();
+  }
+
+  populateForm(employee: Employee) {
+    this.employeeService.setEmployeeGroup(employee);
   }
 
 }

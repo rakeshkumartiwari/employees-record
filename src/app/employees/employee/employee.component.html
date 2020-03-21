@@ -1,6 +1,6 @@
-<div class="alert alert-success alert-dismissible" *ngIf="isClose">
+<div class="alert alert-success alert-dismissible" *ngIf="isShow">
     <a href="#" class="close" data-dismiss="alert" aria-label="close" (click)="onClose()">&times;</a>
-    <strong>Saved Successfully.</strong>
+<strong>{{message}}</strong>
 </div>
 <form [formGroup]="employeeFormGroup" (ngSubmit)="onSubmit()">
 

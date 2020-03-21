@@ -8,6 +8,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 })
 export class EmployeeService {
 
+  employeeGroup = new BehaviorSubject<any>(null);
   employeeListSubject = new BehaviorSubject<any>([]);
 
   constructor(private http: HttpClient) { }
@@ -34,5 +35,21 @@ export class EmployeeService {
 
   deleteEmployee(employeeId: number) {
     return this.http.delete(`${this.baseUrl}/Employee/${employeeId}`);
+  }
+
+  updateEmployee(employeeId: number, employee: Employee) {
+    return this.http.put(`${this.baseUrl}/Employee/${employeeId}`, employee);
+  }
+
+  setEmployeeGroup(employee: Employee) {
+    if (employee) {
+      this.employeeGroup.next(employee);
+    } else {
+      this.employeeGroup.next(null);
+    }
+  }
+
+  get getemployeeSubject() {
+    return this.employeeGroup.asObservable();
   }
 }
