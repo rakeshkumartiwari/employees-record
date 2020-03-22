@@ -93,4 +93,8 @@ export class EmployeeComponent implements OnInit {
     this.employeeService.setEmployeeList();
   }
 
+  onCancel(){
+    this.reset();
+  }
+
 }

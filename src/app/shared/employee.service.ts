@@ -26,7 +26,8 @@ export class EmployeeService {
       } else {
         this.employeeListSubject.next([]);
       }
-    });
+    },
+     err => this.employeeListSubject.next([]));
   }
 
   get getEmployeeList() {
