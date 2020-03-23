@@ -39,8 +39,8 @@ export class EmployeeService {
     return this.http.delete(`${this.baseUrl}/Employee/${employeeId}`);
   }
 
-  updateEmployee(employeeId: number, employee: Employee) {
-    return this.http.put(`${this.baseUrl}/Employee/${employeeId}`, employee);
+  updateEmployee(employee: Employee) {
+    return this.http.put(`${this.baseUrl}/Employee/${employee.EmplloyeeId}`, employee);
   }
 
   setEmployeeGroup(employee: Employee) {

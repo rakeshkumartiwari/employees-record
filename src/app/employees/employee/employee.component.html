@@ -1,9 +1,4 @@
-<div class="alert alert-success alert-dismissible" *ngIf="isShow">
-    <a href="#" class="close" data-dismiss="alert" aria-label="close" (click)="onClose()">&times;</a>
-    <strong>{{message}}</strong>
-</div>
 <form [formGroup]="employeeFormGroup" (ngSubmit)="onSubmit()" autocomplete="off">
-
     <mat-form-field class="full-width">
         <mat-label>Full Name</mat-label>
         <input matInput formControlName="FullName" required>
@@ -24,7 +19,8 @@
     <div class="form-group">
         <div class="row">
             <div class="col-md-6">
-                <button mat-raised-button color="primary" style="width: 100%;" [disabled]="!employeeFormGroup.valid">Submit</button>
+                <button mat-raised-button color="primary" style="width: 100%;"
+                    [disabled]="!employeeFormGroup.valid">Submit</button>
             </div>
             <div class="col-md-6">
                 <button mat-raised-button color="primary" style="width: 100%;" (click)="onCancel()">Cancel</button>

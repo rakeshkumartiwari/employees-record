@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { EmployeeService } from 'src/app/shared/employee.service';
 import { Employee } from 'src/app/shared/employee.model';
 import { EmployeeConst } from '../employee-const';
+import { ToastrManager } from 'ng6-toastr-notifications';
 
 @Component({
   selector: 'app-employee',
@@ -10,11 +11,7 @@ import { EmployeeConst } from '../employee-const';
   styleUrls: ['./employee.component.css']
 })
 export class EmployeeComponent implements OnInit {
-  isShow: boolean;
-  EmpId: number;
-  message: string;
-
-  constructor(private employeeService: EmployeeService) { }
+  constructor(private employeeService: EmployeeService, private toastr: ToastrManager) { }
 
   employeeFormGroup: FormGroup;
   employee: Employee;
@@ -27,7 +24,6 @@ export class EmployeeComponent implements OnInit {
     this.employeeService.getemployeeSubject.subscribe(
       data => {
         if (data) {
-          this.EmpId = data.EmplloyeeId;
           this.employeeFormGroup.setValue({
             EmplloyeeId: data.EmplloyeeId,
             FullName: data.FullName,
@@ -71,7 +67,7 @@ export class EmployeeComponent implements OnInit {
         }
       });
     } else {
-      this.employeeService.updateEmployee(this.EmpId, this.employeeFormGroup.value).subscribe(data => {
+      this.employeeService.updateEmployee(this.employeeFormGroup.value).subscribe(data => {
         this.reset(EmployeeConst.UPDATED);
       });
     }
@@ -82,15 +78,10 @@ export class EmployeeComponent implements OnInit {
   }
 
   reset(message: string) {
-    this.message = message;
-    this.isShow = true;
     this.setEmployeeList();
     this.resetFormGroup();
     this.employeeService.setLoaderSubject(false);
-  }
-
-  onClose() {
-    this.isShow = false;
+    this.toastr.successToastr(message);
   }
 
   setEmployeeList() {
