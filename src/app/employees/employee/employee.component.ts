@@ -92,4 +92,10 @@ export class EmployeeComponent implements OnInit {
     this.resetFormGroup();
   }
 
+  onChange(control) {
+    if (isNaN(this.employeeFormGroup.get(control).value)) {
+      this.employeeFormGroup.controls[control].setValue('');
+    }
+  }
+
 }

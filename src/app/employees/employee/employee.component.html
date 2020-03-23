@@ -10,11 +10,11 @@
     </mat-form-field>
     <mat-form-field class="full-width">
         <mat-label>Employee Code</mat-label>
-        <input matInput formControlName="EMPCode" maxlength="6">
+        <input matInput formControlName="EMPCode" maxlength="6" (keyup)="onChange('EMPCode')">
     </mat-form-field>
     <mat-form-field class="full-width">
         <mat-label>Mobile number</mat-label>
-        <input matInput formControlName="Mobile" maxlength="10">
+        <input matInput formControlName="Mobile" maxlength="10" (keyup)="onChange('Mobile')">
     </mat-form-field>
     <div class="form-group">
         <div class="row">
