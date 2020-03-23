@@ -2,7 +2,7 @@
     <mat-form-field class="full-width">
         <mat-label>Full Name</mat-label>
         <input matInput formControlName="FullName" required>
-        <mat-error *ngIf="FullName.invalid && FullName.touched">Field is required</mat-error>
+        <mat-error *ngIf="!FullName.pristine && FullName.invalid && FullName.touched">Field is required</mat-error>
     </mat-form-field>
     <mat-form-field class="full-width">
         <mat-label>Position</mat-label>
@@ -19,11 +19,11 @@
     <div class="form-group">
         <div class="row">
             <div class="col-md-6">
-                <button mat-raised-button color="primary" style="width: 100%;"
+                <button mat-raised-button color="primary" type="submit" style="width: 100%;"
                     [disabled]="!employeeFormGroup.valid">Submit</button>
             </div>
             <div class="col-md-6">
-                <button mat-raised-button color="primary" style="width: 100%;" (click)="onCancel()">Cancel</button>
+                <button mat-raised-button color="primary" type="reset" style="width: 100%;" (click)="onCancel()">Cancel</button>
             </div>
         </div>
     </div>

@@ -65,22 +65,27 @@ export class EmployeeComponent implements OnInit {
         if (data) {
           this.reset(EmployeeConst.SAVED);
         }
-      });
+      },
+        err => this.employeeService.setLoaderSubject(false));
     } else {
       this.employeeService.updateEmployee(this.employeeFormGroup.value).subscribe(data => {
         this.reset(EmployeeConst.UPDATED);
-      });
+      },
+        err => this.employeeService.setLoaderSubject(false));
     }
   }
 
   resetFormGroup() {
     this.employeeFormGroup.reset();
+    Object.keys(this.employeeFormGroup.controls).forEach(key => {
+      this.employeeFormGroup.get(key).setErrors(null);
+    });
+    this.employeeService.setLoaderSubject(false);
   }
 
   reset(message: string) {
     this.setEmployeeList();
     this.resetFormGroup();
-    this.employeeService.setLoaderSubject(false);
     this.toastr.successToastr(message);
   }
 
