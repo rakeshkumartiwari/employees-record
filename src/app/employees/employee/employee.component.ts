@@ -67,16 +67,16 @@ export class EmployeeComponent implements OnInit {
         if (data) {
           this.isShow = true;
           this.message = 'Saved Successfully.';
-          this.reset();
           this.setEmployeeList();
+          this.reset();
         }
       });
     } else {
       this.employeeService.updateEmployee(this.EmpId, this.employeeFormGroup.value).subscribe(data => {
         this.isShow = true;
         this.message = 'Updated Successfully.';
-        this.reset();
         this.setEmployeeList();
+        this.reset();
       });
     }
   }

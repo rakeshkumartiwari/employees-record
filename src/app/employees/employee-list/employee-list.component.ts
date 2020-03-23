@@ -22,6 +22,9 @@ export class EmployeeListComponent implements OnInit {
   }
 
   onDelete(employeeId: number) {
+    if (!confirm('Are you want to delete this record?')) {
+      return false;
+    }
     this.employeeService.deleteEmployee(employeeId).subscribe(data => this.getEmployeeList());
     this.getEmployeeList();
   }

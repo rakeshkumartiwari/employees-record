@@ -1,4 +1,4 @@
-<table class="table table-bordered">
+<table class="table table-hover">
     <thead>
         <tr>
             <th>EMP Code</th>
@@ -10,11 +10,14 @@
     </thead>
     <tbody>
         <tr *ngFor="let employee of employeeList">
-            <td (click)="populateForm(employee)">{{employee.EMPCode}}</td>
-            <td (click)="populateForm(employee)">{{employee.FullName}}</td>
-            <td (click)="populateForm(employee)">{{employee.Position}}</td>
-            <td (click)="populateForm(employee)">{{employee.Mobile}}</td>
-            <td><button class="btn btn-sm btn-outline-danger" (click)="onDelete(employee.EmplloyeeId)">X</button></td>
+            <td>{{employee.FullName}}</td>
+            <td>{{employee.Position}}</td>
+            <td>{{employee.EMPCode}}</td>
+            <td>{{employee.Mobile}}</td>
+            <td>
+                <mat-icon style="color: #217fd0;" (click)="populateForm(employee)">edit</mat-icon>
+                <mat-icon style="color: #217fd0;" (click)="onDelete(employee.EmplloyeeId)">delete</mat-icon>
+            </td>
         </tr>
     </tbody>
 </table>

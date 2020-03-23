@@ -2,34 +2,32 @@
     <a href="#" class="close" data-dismiss="alert" aria-label="close" (click)="onClose()">&times;</a>
     <strong>{{message}}</strong>
 </div>
-<form [formGroup]="employeeFormGroup" (ngSubmit)="onSubmit()">
+<form [formGroup]="employeeFormGroup" (ngSubmit)="onSubmit()" autocomplete="off">
 
-    <div class="form-group">
-        <label>Full Name</label>
-        <input class="form-control" formControlName="FullName" required>
-        <div class="validation-error" *ngIf="FullName.invalid && FullName.touched">Field is required</div>
-    </div>
-    <div class="form-group">
-        <label>Position</label>
-        <input class="form-control" formControlName="Position">
-    </div>
-    <div class="row">
-        <div class="form-group col-md-6">
-            <label>Employee Code</label>
-            <input class="form-control" formControlName="EMPCode" maxlength="6">
-        </div>
-        <div class="form-group col-md-6">
-            <label>Mobile Number</label>
-            <input class="form-control" formControlName="Mobile" maxlength="10">
-        </div>
-    </div>
+    <mat-form-field class="full-width">
+        <mat-label>Full Name</mat-label>
+        <input matInput formControlName="FullName" required>
+        <mat-error *ngIf="FullName.invalid && FullName.touched">Field is required</mat-error>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+        <mat-label>Position</mat-label>
+        <input matInput formControlName="Position">
+    </mat-form-field>
+    <mat-form-field class="full-width">
+        <mat-label>Employee Code</mat-label>
+        <input matInput formControlName="EMPCode" maxlength="6">
+    </mat-form-field>
+    <mat-form-field class="full-width">
+        <mat-label>Mobile number</mat-label>
+        <input matInput formControlName="Mobile" maxlength="10">
+    </mat-form-field>
     <div class="form-group">
         <div class="row">
             <div class="col-md-6">
-                <button class="btn btn-lg btn-block btn-info" [disabled]="!employeeFormGroup.valid">Submit</button>
+                <button mat-raised-button color="primary" style="width: 100%;" [disabled]="!employeeFormGroup.valid">Submit</button>
             </div>
             <div class="col-md-6">
-                <button class="btn btn-lg btn-block btn-info" (click)="onCancel()">Cancel</button>
+                <button mat-raised-button color="primary" style="width: 100%;" (click)="onCancel()">Cancel</button>
             </div>
         </div>
     </div>
