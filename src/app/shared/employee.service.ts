@@ -8,8 +8,9 @@ import { Observable, BehaviorSubject } from 'rxjs';
 })
 export class EmployeeService {
 
-  employeeGroup = new BehaviorSubject<any>(null);
-  employeeListSubject = new BehaviorSubject<any>([]);
+  private employeeGroup = new BehaviorSubject<any>(null);
+  private employeeListSubject = new BehaviorSubject<any>([]);
+  private loaderSubject = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient) { }
 
@@ -27,7 +28,7 @@ export class EmployeeService {
         this.employeeListSubject.next([]);
       }
     },
-     err => this.employeeListSubject.next([]));
+      err => this.employeeListSubject.next([]));
   }
 
   get getEmployeeList() {
@@ -53,4 +54,13 @@ export class EmployeeService {
   get getemployeeSubject() {
     return this.employeeGroup.asObservable();
   }
+
+  setLoaderSubject(data: boolean) {
+    this.loaderSubject.next(data);
+  }
+
+  get getLoderSubject() {
+    return this.loaderSubject.asObservable();
+  }
+
 }

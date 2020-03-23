@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { EmployeeService } from 'src/app/shared/employee.service';
 import { Employee } from 'src/app/shared/employee.model';
+import { EmployeeConst } from '../employee-const';
 
 @Component({
   selector: 'app-employee',
@@ -62,27 +63,30 @@ export class EmployeeComponent implements OnInit {
   }
 
   onSubmit() {
+    this.employeeService.setLoaderSubject(true);
     if (this.employeeFormGroup.valid && this.employeeFormGroup.get('EmplloyeeId').value == null) {
       this.employeeService.saveEmployee(this.employeeFormGroup.value).subscribe((data) => {
         if (data) {
-          this.isShow = true;
-          this.message = 'Saved Successfully.';
-          this.setEmployeeList();
-          this.reset();
+          this.reset(EmployeeConst.SAVED);
         }
       });
     } else {
       this.employeeService.updateEmployee(this.EmpId, this.employeeFormGroup.value).subscribe(data => {
-        this.isShow = true;
-        this.message = 'Updated Successfully.';
-        this.setEmployeeList();
-        this.reset();
+        this.reset(EmployeeConst.UPDATED);
       });
     }
   }
 
-  reset() {
+  resetFormGroup() {
     this.employeeFormGroup.reset();
+  }
+
+  reset(message: string) {
+    this.message = message;
+    this.isShow = true;
+    this.setEmployeeList();
+    this.resetFormGroup();
+    this.employeeService.setLoaderSubject(false);
   }
 
   onClose() {
@@ -93,8 +97,8 @@ export class EmployeeComponent implements OnInit {
     this.employeeService.setEmployeeList();
   }
 
-  onCancel(){
-    this.reset();
+  onCancel() {
+    this.resetFormGroup();
   }
 
 }

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { EmployeeService } from 'src/app/shared/employee.service';
 import { Employee } from 'src/app/shared/employee.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-employee-list',

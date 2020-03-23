@@ -10,13 +10,13 @@
     </thead>
     <tbody>
         <tr *ngFor="let employee of employeeList">
+            <td>{{employee.EMPCode}}</td>
             <td>{{employee.FullName}}</td>
             <td>{{employee.Position}}</td>
-            <td>{{employee.EMPCode}}</td>
             <td>{{employee.Mobile}}</td>
             <td>
-                <mat-icon style="color: #217fd0;" (click)="populateForm(employee)">edit</mat-icon>
-                <mat-icon style="color: #217fd0;" (click)="onDelete(employee.EmplloyeeId)">delete</mat-icon>
+                <mat-icon style="color: #673ab7;" (click)="populateForm(employee)">edit</mat-icon>
+                <mat-icon style="color: #673ab7;" (click)="onDelete(employee.EmplloyeeId)">delete</mat-icon>
             </td>
         </tr>
     </tbody>
