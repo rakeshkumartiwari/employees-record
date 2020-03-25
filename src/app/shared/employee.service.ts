@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Employee } from './employee.model';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -15,10 +16,6 @@ export class EmployeeService {
   constructor(private http: HttpClient) { }
 
   private baseUrl = 'http://localhost:56841/api';
-
-  saveEmployee(employee) {
-    return this.http.post(`${this.baseUrl}/Employee`, employee);
-  }
 
   setEmployeeList() {
     this.http.get(`${this.baseUrl}/Employee`).subscribe(data => {
@@ -35,6 +32,10 @@ export class EmployeeService {
     return this.employeeListSubject.asObservable();
   }
 
+  saveEmployee(employee) {
+    return this.http.post(`${this.baseUrl}/Employee`, employee).pipe(catchError(this.handleError));
+  }
+ 
   deleteEmployee(employeeId: number) {
     return this.http.delete(`${this.baseUrl}/Employee/${employeeId}`);
   }
@@ -61,6 +62,18 @@ export class EmployeeService {
 
   get getLoderSubject() {
     return this.loaderSubject.asObservable();
+  }
+
+  handleError(error) {
+    let errorMessage = '';
+    if (error.error instanceof ErrorEvent) {
+      // client-side error
+      errorMessage = `Error: ${error.error.message}`;
+    } else {
+      // server-side error
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    return throwError(errorMessage);
   }
 
 }

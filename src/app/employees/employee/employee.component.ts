@@ -66,12 +66,18 @@ export class EmployeeComponent implements OnInit {
           this.reset(EmployeeConst.SAVED);
         }
       },
-        err => this.employeeService.setLoaderSubject(false));
+        err => {
+          this.toastr.errorToastr(err);
+          this.employeeService.setLoaderSubject(false);
+        });
     } else {
       this.employeeService.updateEmployee(this.employeeFormGroup.value).subscribe(data => {
         this.reset(EmployeeConst.UPDATED);
       },
-        err => this.employeeService.setLoaderSubject(false));
+        err => {
+          this.toastr.errorToastr(err);
+          this.employeeService.setLoaderSubject(false);
+        });
     }
   }
 
