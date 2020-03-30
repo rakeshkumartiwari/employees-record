@@ -20,7 +20,10 @@ export class EmployeeListComponent implements OnInit {
 
   getEmployeeList() {
     this.employeeService.setEmployeeList();
-    this.employeeService.getEmployeeList.subscribe(data => this.employeeList = data);
+    this.employeeService.getEmployeeList.subscribe(
+      data => this.employeeList = data,
+      error => this.toastr.errorToastr(error.message)
+      );
   }
 
   onDelete(employeeId: number) {
